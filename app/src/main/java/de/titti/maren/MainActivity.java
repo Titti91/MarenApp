@@ -5,6 +5,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,10 +26,16 @@ public class MainActivity extends AppCompatActivity {
     TextView monthText;
     TextView dayText;
 
-
+    NotificationManagerCompat notificationManager;
 //    DateTime anniversary = new DateTime(2013, 1, 4,0,0);   //real value
     DateTime anniversary = new DateTime(2019, 12, 7,0,0);  //testvalue
     DateTime currentTime = new DateTime();
+
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "test")
+            .setSmallIcon(android.R.drawable.btn_star) //icon
+            .setContentTitle("Test") //Title
+            .setContentText("Das ist der Inhalt") //Content
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +44,19 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+         notificationManager = NotificationManagerCompat.from(this);
+
        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+
+
+// notificationId is a unique int for each notification that you must define
+                notificationManager.notify(01, builder.build());
+
             }
         });
 
@@ -66,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
         year.setText(p.getYears()+"");
         month.setText(p.getMonths()+"");
         day.setText(p.getDays()+"");
+
+
+
+
+
+
+
     }
 
 
