@@ -1,13 +1,14 @@
 package de.titti.maren;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
+import android.os.SystemClock;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,16 +28,14 @@ public class MainActivity extends AppCompatActivity {
     TextView monthText;
     TextView dayText;
 
-    NotificationManagerCompat notificationManager;
 //    DateTime anniversary = new DateTime(2013, 1, 4,0,0);   //real value
     DateTime anniversary = new DateTime(2019, 12, 7,0,0);  //testvalue
     DateTime currentTime = new DateTime();
 
-    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "test")
-            .setSmallIcon(android.R.drawable.btn_star) //icon
-            .setContentTitle("Test") //Title
-            .setContentText("Das ist der Inhalt") //Content
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+
+    ///set Alarm/////
+AlarmManager alarmMgr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         notificationManager = NotificationManagerCompat.from(this);
+            alarmMgr = (AlarmManager) getSystemService(ALARM_SERVICE);
 
        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -54,11 +54,37 @@ public class MainActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 
 
-// notificationId is a unique int for each notification that you must define
-                notificationManager.notify(01, builder.build());
 
             }
         });
+
+
+
+// Hopefully your alarm will have a lower frequency than this!
+        Intent intent = new Intent(this, MyReceiver.class);
+
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(this,112,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        if (alarmIntent != null)
+            alarmMgr.cancel(alarmIntent);
+/*
+1st Param : Context
+2nd Param : Integer request code
+3rd Param : Wrapped Intent
+4th Intent: Flag
+*/
+
+//////////////real mgr with checking every Day/////
+//        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//                SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_DAY,
+//                AlarmManager.INTERVAL_DAY, alarmIntent);
+
+
+        ////////////sample mgr with checking every minute/////
+        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + (30*1000),
+                30*1000, alarmIntent);
+
+
 
         year = (TextView)this.findViewById(R.id.yearValue);
         month = (TextView)this.findViewById(R.id.monthValue);
