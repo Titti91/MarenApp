@@ -2,11 +2,14 @@
     <string name="app_name">Maren</string>
     <string name="action_settings">Settings</string>
     <string name="intro_text">Heute sind wir genau:</string>
-    <string name="outro_text">zusammen und ich liebe dich noch genau so sehr wie am ersten Tag</string>
+    <string name="outro0_text">und ich liebe dich noch genau so sehr wie am ersten Tag</string>
+    <string name="outro1_text">und jeder Tag mit dir ist immer wieder aufs neue besonders, ich liebe dich</string>
+    <string name="outro2_text">Du bist die tollste Frau der Welt</string>
     <string name="year_value">7</string>
     <string name="year_text">Jahre</string>
     <string name="month_value">29</string>
     <string name="month_text">Monate</string>
     <string name="day_value">0</string>
     <string name="day_text">Tage</string>
+    <string name="tailing_text">zusammen</string>
 </resources>

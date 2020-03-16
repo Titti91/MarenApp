@@ -18,6 +18,8 @@ import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 
+import java.util.Random;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     TextView yearText;
     TextView monthText;
     TextView dayText;
+
+    TextView outroText;
 
 //    DateTime anniversary = new DateTime(2013, 1, 4,0,0);   //real value
     DateTime anniversary = new DateTime(2019, 12, 7,0,0);  //testvalue
@@ -44,19 +48,19 @@ AlarmManager alarmMgr;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-            alarmMgr = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmMgr = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-       FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-
-
-
-            }
-        });
+//       FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+////                        .setAction("Action", null).show();
+//
+//
+//
+//            }
+//        });
 
 
 
@@ -81,17 +85,23 @@ AlarmManager alarmMgr;
 
         ////////////sample mgr with checking every minute/////
         alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + (30*1000),
-                30*1000, alarmIntent);
+                SystemClock.elapsedRealtime() + (30*1000),      //startzeit
+                30*1000, alarmIntent);                           //intervall
 
 
+        outroText = findViewById(R.id.outroText);
 
-        year = (TextView)this.findViewById(R.id.yearValue);
-        month = (TextView)this.findViewById(R.id.monthValue);
-        day = (TextView)this.findViewById(R.id.dayValue);
-        yearText = (TextView)this.findViewById(R.id.yearText);
-        monthText = (TextView)this.findViewById(R.id.monthText);
-        dayText = (TextView)this.findViewById(R.id.dayText);
+        int[] outros = {R.string.outro0_text, R.string.outro1_text, R.string.outro2_text};
+
+        Random r = new Random();
+        outroText.setText(outros[r.nextInt(3)]);
+
+        year = findViewById(R.id.yearValue);
+        month = findViewById(R.id.monthValue);
+        day = findViewById(R.id.dayValue);
+        yearText = findViewById(R.id.yearText);
+        monthText = findViewById(R.id.monthText);
+        dayText = findViewById(R.id.dayText);
 
         Period p = calculateTime(anniversary, currentTime);
 
