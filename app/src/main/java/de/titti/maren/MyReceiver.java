@@ -17,7 +17,7 @@ public class MyReceiver extends BroadcastReceiver {
 
     NotificationManagerCompat notificationManager;
     //    DateTime anniversary = new DateTime(2013, 1, 4,0,0);   //real value
-    DateTime anniversary = new DateTime(2019, 2, 16,0,0);  //testvalue
+    DateTime anniversary = new DateTime(2019, 3, 17,0,0);  //testvalue
     DateTime currentTime = new DateTime();
 
     @Override
@@ -40,10 +40,10 @@ public class MyReceiver extends BroadcastReceiver {
         }
 
     }
-
+//////////////////////failed to push notifications///////////////////////////////////////
     private void sendMonthNotification(Context context, PendingIntent pendingIntent){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "test")
-                .setSmallIcon(android.R.drawable.btn_star) //icon
+                .setSmallIcon(android.R.drawable.btn_star) //icon   R.drawable.notification_icon
                 .setContentTitle("Hallo mein Schatz") //Title
                 .setContentText("Heute beginnt ein weiterer glücklicher Monat mit dir!!!") //Content
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

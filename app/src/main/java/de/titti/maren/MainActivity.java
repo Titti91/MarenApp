@@ -91,10 +91,10 @@ AlarmManager alarmMgr;
 
         outroText = findViewById(R.id.outroText);
 
-        int[] outros = {R.string.outro0_text, R.string.outro1_text, R.string.outro2_text};
+        int[] outros = {R.string.outro0_text, R.string.outro1_text, R.string.outro2_text, R.string.outro3_text};
 
         Random r = new Random();
-        outroText.setText(outros[r.nextInt(3)]);
+        outroText.setText(outros[r.nextInt(outros.length)]);
 
         year = findViewById(R.id.yearValue);
         month = findViewById(R.id.monthValue);
@@ -119,21 +119,13 @@ AlarmManager alarmMgr;
         month.setText(p.getMonths()+"");
         day.setText(p.getDays()+"");
 
-
-
-
-
-
-
     }
-
 
     public Period calculateTime(
             DateTime anniversary,
             DateTime currentDate) {
         return new Period(anniversary, currentDate, PeriodType.yearMonthDay());
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -153,7 +145,6 @@ AlarmManager alarmMgr;
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
