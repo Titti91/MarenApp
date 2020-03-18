@@ -4,20 +4,15 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.os.SystemClock;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
-
 import java.util.Random;
 
 
@@ -32,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView outroText;
 
-//    DateTime anniversary = new DateTime(2013, 1, 4,0,0);   //real value
-    DateTime anniversary = new DateTime(2019, 12, 7,0,0);  //testvalue
+    DateTime anniversary = new DateTime(2013, 1, 4,0,0);   //real value
+//    DateTime anniversary = new DateTime(2019, 12, 7,0,0);  //testvalue
     DateTime currentTime = new DateTime();
 
 
@@ -49,19 +44,6 @@ AlarmManager alarmMgr;
         setSupportActionBar(toolbar);
 
         alarmMgr = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-//       FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-////                        .setAction("Action", null).show();
-//
-//
-//
-//            }
-//        });
-
 
 
 // Hopefully your alarm will have a lower frequency than this!
@@ -85,8 +67,8 @@ AlarmManager alarmMgr;
 
         ////////////sample mgr with checking every minute/////
         alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + (30*1000),      //startzeit
-                30*1000, alarmIntent);                           //intervall
+                SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES,      //startzeit (30*1000)
+                AlarmManager.INTERVAL_DAY, alarmIntent);                           //intervall 30*1000
 
 
         outroText = findViewById(R.id.outroText);
