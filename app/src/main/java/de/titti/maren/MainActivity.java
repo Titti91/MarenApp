@@ -67,8 +67,8 @@ AlarmManager alarmMgr;
 
         ////////////sample mgr with checking every minute/////
         alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES,      //startzeit (30*1000)
-                AlarmManager.INTERVAL_DAY, alarmIntent);                           //intervall 30*1000
+                SystemClock.elapsedRealtime() + 15*60*1000,      //startzeit (30*1000)
+                12*60*60*1000, alarmIntent);                           //intervall 30*1000
 
 
         outroText = findViewById(R.id.outroText);

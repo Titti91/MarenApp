@@ -19,7 +19,7 @@ public class MyReceiver extends BroadcastReceiver {
     NotificationManagerCompat notificationManager;
     private NotificationManager notifManager;
         DateTime anniversary = new DateTime(2013, 1, 4,0,0);   //real value
-//    DateTime anniversary = new DateTime(2019, 2, 18,0,0);  //testvalue
+//    DateTime anniversary = new DateTime(2019, 4, 22,0,0);  //testvalue
     DateTime currentTime = new DateTime();
 
     @Override
